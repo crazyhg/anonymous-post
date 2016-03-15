@@ -30,9 +30,9 @@
       <div class="ap-title"><?php _e('AccessPress Anonymous Post Settings','accesspress-anonymous-post');?></div>
     </div>
 
-    <?php if(isset($_SESSION['ap_message'])){?>
+    <?php if(isset($_GET['success']) && $_GET['success'] == '1'){?>
     <div id="messages" class="update">
-     <?php echo $_SESSION['ap_message'];unset($_SESSION['ap_message']);?>
+     <?php echo __('Settings Saved Successfully.','accesspress-anonymous-post');?>
    </div>
    <?php }?>
     

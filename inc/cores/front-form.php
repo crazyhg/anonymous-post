@@ -37,10 +37,9 @@ if ( $ap_settings['editor_type'] == 'simple' ) {
  * */
 $nonce_field = $this->get_nonce_field_html();
 $form = '<h2>' . $form_title . '</h2>';
-if ( isset( $_SESSION['ap_form_success_msg'] ) && $ap_settings['redirect_url'] == '' ) {
-	$success_msg = $_SESSION['ap_form_success_msg'];
+if ( isset($_GET['success']) && $_GET['success'] == '1' && $ap_settings['redirect_url'] == '' ) {
+	$success_msg = ($ap_settings['post_submission_message'] == '') ? __( 'Hi there, Thank you for submitting a post.', 'accesspress-anonymous-post' ) : $ap_settings['post_submission_message'];
 	$form .='<div class="ap-post-submission-message">' . $success_msg . '</div>';
-	unset( $_SESSION['ap_form_success_msg'] );
 }
 $form .='<form method="post" action="" enctype="multipart/form-data" class="ap-form-wrapper" onsubmit="return check_form_submittable()">
                 <div class="ap-form-field-wrapper">

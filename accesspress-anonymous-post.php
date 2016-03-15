@@ -4,7 +4,7 @@ defined('ABSPATH') or die("No script kiddies please!");
  * Plugin Name:AccessPress Anonymous Post
  * Plugin URI: http://accesspressthemes.com/wordpress-plugins/accesspress-anonymous-post/
  * Description: A plugin that provides the ability to publish post from frontend with or without login anonymously using a simple html5 form from anywhere of the site with the help of shortcode and various backend settings.
- * Version:2.5.2
+ * Version:2.5.2.1
  * Author:AccessPress Themes
  * Author URI:http://accesspressthemes.com/
  * Text Domain: accesspress-anonymous-post
@@ -49,7 +49,6 @@ defined('ABSPATH') or die("No script kiddies please!");
             $this->ap_settings = get_option('ap_settings');
             register_activation_hook( __FILE__, array( $this, 'load_default_settings' ) );//loads default settings for the plugin while activating the plugin
             add_action('init',array($this,'plugin_text_domain'));//loads text domain for translation ready
-            add_action('init',array($this,'session_init')); //starts session if not started
             add_action('template_redirect',array($this,'submit_form'));//captures all the form values before printing any other html
             add_action('admin_post_ap_settings_action',array($this,'ap_settings_action'));//settings action 
             add_action('admin_menu',array($this,'add_ap_menu'));//adds plugin menu in wp-admin
@@ -122,15 +121,6 @@ defined('ABSPATH') or die("No script kiddies please!");
                exit;    
             }
         
-        }
-        
-        //starts the session with the call of init hook
-        function session_init()
-        {
-            if(!session_id() && !headers_sent())
-            {
-                session_start();
-            }
         }
         
         //Load default settings during plugin activation
@@ -340,10 +330,9 @@ defined('ABSPATH') or die("No script kiddies please!");
        //shortcode for showing the message in any redirected page after successful post submission
        function ap_form_message()
        {
-        if(isset($_SESSION['ap_form_success_msg']))
+        if(isset($_GET['restored']) && $_GET['restored'] == '1')
         {
-         $msg = $_SESSION['ap_form_success_msg'];
-         unset($_SESSION['ap_form_success_msg']);
+         $msg = __('Default Settings Restored Successfully.','accesspress-anonymous-post');
          return $msg;    
         }
          
@@ -414,8 +403,7 @@ defined('ABSPATH') or die("No script kiddies please!");
             $ap_settings['admin_email_list'] = array();
             $ap_settings['math_captcha_error_message'] = '';
             $restore = update_option('ap_settings',$ap_settings);
-            $_SESSION['ap_message'] = __('Default Settings Restored Successfully.','accesspress-anonymous-post');
-            wp_redirect(admin_url().'admin.php?page=anonymous-post');
+            wp_redirect(admin_url().'admin.php?page=anonymous-post&restored=1');
             exit;
                 
             

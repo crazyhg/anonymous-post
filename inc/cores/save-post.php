@@ -167,10 +167,8 @@ if ( $error_flag == 0 ) {
 			if ( $ap_settings['admin_notification'] ) {
 				$this->send_admin_notification( $post_id, $ap_form_post_title );
 			}
-			$success = new stdClass();
-			$success->msg = ($ap_settings['post_submission_message'] == '') ? __( 'Hi there, Thank you for submitting a post.', 'accesspress-anonymous-post' ) : $ap_settings['post_submission_message'];
-			$_SESSION['ap_form_success_msg'] = $success->msg;
-			wp_redirect( esc_url( $_POST['redirect_url'] ) );
+			$redirect = add_query_arg('success', 1, $_POST['redirect_url'] );
+			wp_redirect( esc_url( $redirect ) );
 			exit;
 		}
 	}//if close
