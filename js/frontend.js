@@ -150,5 +150,8 @@
         $('.ap-form-wrapper input[type="file"]').change(function () {
             $(this).closest('.ap-form-field-wrapper').find('.ap-form-error-message').html('');
         });
+        $('.ap-form-wrapper textarea').change(function () {
+            $(this).closest('.ap-form-field-wrapper').find('.ap-form-error-message').html('');
+        });
     });
 }(jQuery));
