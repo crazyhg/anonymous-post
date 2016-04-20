@@ -95,7 +95,8 @@ if ( !empty( $ap_settings['form_included_taxonomy'] ) ) {
                    <label>' . $taxonomy_form_label . '</label>
                 <div class="ap-form_field">
                   <select name="' . $taxonomy . '_taxonomy" ' . $required . ' data-required-message="' . $category_required_message . '">';
-			$terms = get_terms( $taxonomy, array( 'hide_empty' => 0, 'order' => 'ASC', 'orderby' => 'id' ) );
+                  $terms_args = apply_filters('ap_taxonomy_args',array( 'hide_empty' => 0, 'order' => 'ASC', 'orderby' => 'id' ),$taxonomy);
+			$terms = get_terms( $taxonomy,  $terms_args);
 			foreach ( $terms as $term ) {
 				$form .='<option value="' . $term->term_id . '">' . $term->name . '</option>';
 			}

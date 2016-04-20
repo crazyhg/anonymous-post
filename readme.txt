@@ -4,7 +4,7 @@ Tags: guest post, user post, anonymous post, frontend post, guest author, fronte
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,7 @@ If you're looking for Free WordPress guest post plugin, User Post Plugin, Anonym
 * Croatian
 * Azerbaijani
 * Dutch
+* Swedish
 
 = Translators = 
 * Serbian - Ogi Djuraskovic(http://firstsiteguide.com/)
@@ -89,6 +90,7 @@ If you're looking for Free WordPress guest post plugin, User Post Plugin, Anonym
 * Croatian - Sanjin Barac
 * Azerbaijani - Behruz Cebrayilli
 * Dutch - Kees Bond
+* Swedish - Elias Vahman
 
 For a easy installation guide checkout the Installation tab above.
 
@@ -131,6 +133,11 @@ Once you install the plugin , you can check some general documentation about how
 4. Frontend Form 
 
 == Changelog ==
+= 2.5.5 = 
+* Added redirect parameter for ap-form-message shortcode to prevent direct access
+* Added Swedish Language
+* Added ap_taxonomy_args filter for category dropdown generation
+
 = 2.5.4 = 
 * Added keyup error removal for textarea in the frontend form
 
