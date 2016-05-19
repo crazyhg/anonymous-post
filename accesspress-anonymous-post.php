@@ -130,6 +130,7 @@ defined('ABSPATH') or die("No script kiddies please!");
             $ap_settings['form_title'] = __('Anonymous Post','accesspress-anonymous-post');
             $ap_settings['publish_status'] = 'draft';
             $ap_settings['admin_notification'] = 1;
+            $ap_settings['email_addresses'] = '';
             $ap_settings['login_check'] = 0;
             $ap_settings['login_message'] = __('Please login to submit the post.','accesspress-anonymous-post');
             $ap_settings['login_link_text'] = '';
@@ -279,6 +280,8 @@ defined('ABSPATH') or die("No script kiddies please!");
        //send admin notification if enabled from backend
        function send_admin_notification($post_id,$post_title)
        {
+            $ap_settings = $this->ap_settings;
+            
           	$blogname = get_option('blogname');
 		    $email = get_option('admin_email');
             $headers = "MIME-Version: 1.0\r\n" . "From: ".$blogname." "."<".$email.">\n" . "Content-Type: text/HTML; charset=\"" . get_option('blog_charset') . "\"\r\n";
@@ -306,7 +309,18 @@ defined('ABSPATH') or die("No script kiddies please!");
                         
                         '.__('Thank You','accesspress-anonymous-post');
             $subject = __('New Post Submission - via AccessPress Anonymous Post','accesspress-anonymous-post');
-            wp_mail($email,$subject,$message,$headers);
+            
+            $addresses = array($email);
+            $email_addresses_str = $ap_settings['email_addresses'];
+            if (!empty($email_addresses_str)) {
+                $email_addresses_expl = explode(',', $email_addresses_str);
+                $addresses = array_merge($addresses, $email_addresses_expl);
+            }
+            
+            foreach ($addresses as $email) {
+                $email = trim($email);
+                wp_mail($email,$subject,$message,$headers);
+            }
                         
                         
        }
@@ -379,6 +393,7 @@ defined('ABSPATH') or die("No script kiddies please!");
             $ap_settings['form_title'] = 'Anonymous Post';
             $ap_settings['publish_status'] = 'draft';
             $ap_settings['admin_notification'] = 1;
+            $ap_settings['email_addresses'] = '';
             $ap_settings['login_check'] = 0;
             $ap_settings['login_message'] = __('Please login to submit the post.','accesspress-anonymous-post');
             $ap_settings['login_link_text'] = '';

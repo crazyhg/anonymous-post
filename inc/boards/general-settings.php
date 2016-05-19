@@ -50,6 +50,13 @@
       </div>
     </div>
     <div class="ap-option-wrapper">
+      <label><?php _e('Additional email addresses','accesspress-anonymous-post');?></label>
+      <div class="ap-option-field">
+        <input type="text" name="email_addresses" value="<?php echo esc_attr($ap_settings['email_addresses']);?>"/>
+        <div class="ap-option-note ap-option-width"><?php _e('List of email addresses, comma separated','accesspress-anonymous-post');?></div>
+      </div>
+    </div>
+    <div class="ap-option-wrapper">
       <label class="ap-check-login"><?php _e('Allow Media Uploads:','accesspress-anonymous-post');?></label>
       <div class="ap-option-field">
         <div class="ap-option-checkbox-field">

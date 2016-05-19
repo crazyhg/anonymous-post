@@ -10,6 +10,7 @@
     [form_title] => Anonymous Post
     [publish_status] => draft
     [admin_notification] => 1
+    [email_addresses] => Other email addresses
     [post_author] => 1
     [plugin_styles] => 1
     [redirect_url] => 
@@ -118,6 +119,7 @@ else
 {
     $ap_settings['admin_notification'] = 0;
 }
+$ap_settings['email_addresses'] = $email_addresses;
 $ap_settings['post_category'] = $post_category;
 if(isset($login_check))
 {
